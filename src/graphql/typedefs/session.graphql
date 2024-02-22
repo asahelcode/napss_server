@@ -1,0 +1,8 @@
+type Session {
+  id: ID!
+  session: String!
+}
+
+type Mutation {
+  createSession(session: String!): Session
+}
