@@ -1,0 +1,9 @@
+type Student {
+  id: String!
+  name: String!
+  department: Department
+}
+
+type Mutation {
+  createStudent(name: String!, departmentId: String!): Student
+}

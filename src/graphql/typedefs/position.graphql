@@ -1,0 +1,8 @@
+type Position {
+  id: String!
+  position: String!
+}
+
+type Mutation {
+  createPosition(position: String!): Position
+}
