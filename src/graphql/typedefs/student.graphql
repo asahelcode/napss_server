@@ -1,9 +1,9 @@
 type Student {
-  id: ID!
+  id: String!
   name: String!
-  department: Department!
+  department: Department
 }
 
 type Mutation {
-  createStudent(name: String!, departmentId: ID!): Student
+  createStudent(name: String!, departmentId: String!): Student
 }

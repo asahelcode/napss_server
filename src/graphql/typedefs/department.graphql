@@ -1,5 +1,5 @@
 type Department {
-  id: ID!
+  id: String!
   name: String!
 }
 

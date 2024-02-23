@@ -13,11 +13,16 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum PositionLevel {
+  FACULTY
+  DEPARTMENT
+}
+
 model Student {
   id           String              @id @default(uuid())
-  name         String
+  name         String @unique
   department   Department          @relation(fields: [departmentId], references: [id])
-  departmentId String
+  departmentId String @default(uuid())
   history      LeadershipHistory[]
 }
 
@@ -30,14 +35,13 @@ model Department {
 
 model Session {
   id      String              @id @default(uuid())
-  session String
+  session String              @unique
   history LeadershipHistory[]
 }
 
 model LeadershipPosition {
   id       String              @id @default(uuid())
   position String
-  level    Boolean
   history  LeadershipHistory[]
 }
 
@@ -51,4 +55,5 @@ model LeadershipHistory {
   sessionId    String
   position     LeadershipPosition @relation(fields: [positionId], references: [id])
   positionId   String
+  level        PositionLevel
 }

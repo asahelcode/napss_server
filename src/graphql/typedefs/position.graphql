@@ -1,8 +1,8 @@
 type Position {
-  id: ID!
-  name: String!
+  id: String!
+  position: String!
 }
 
 type Mutation {
-  createPosition(name: String!): Position
+  createPosition(position: String!): Position
 }
