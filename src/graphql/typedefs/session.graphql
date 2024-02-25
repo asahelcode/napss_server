@@ -1,6 +1,12 @@
 type Session {
-  id: ID!
-  session: String!
+  id: String
+  session: String
+  history: [LeadershipHistory]!
+}
+
+type Query {
+  sessions: [Session]
+  sessionPresidents: [Session]
 }
 
 type Mutation {
