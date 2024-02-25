@@ -1,0 +1,20 @@
+type LeadershipHistory {
+  id: String
+  student: Student!
+  position: Position!
+  level: String
+}
+
+enum Level {
+  FACULTY
+  DEPARTMENT
+}
+
+
+type Query {
+  histories: [LeadershipHistory]
+}
+
+type Mutation {
+  createHistory(studentId: String!, sessionId: String!, positionId: String!, level: Level!): LeadershipHistory
+}

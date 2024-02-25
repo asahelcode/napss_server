@@ -20,17 +20,16 @@ enum PositionLevel {
 
 model Student {
   id           String              @id @default(uuid())
-  name         String @unique
+  name         String              @unique
   department   Department          @relation(fields: [departmentId], references: [id])
-  departmentId String @default(uuid())
+  departmentId String              @default(uuid())
   history      LeadershipHistory[]
 }
 
 model Department {
-  id        String              @id @default(uuid())
+  id        String    @id @default(uuid())
   name      String
   officials Student[]
-  history   LeadershipHistory[]
 }
 
 model Session {
@@ -46,14 +45,12 @@ model LeadershipPosition {
 }
 
 model LeadershipHistory {
-  id           String             @id @default(uuid())
-  student      Student            @relation(fields: [studentId], references: [id])
-  studentId    String
-  department   Department         @relation(fields: [departmentId], references: [id])
-  departmentId String
-  session      Session            @relation(fields: [sessionId], references: [id])
-  sessionId    String
-  position     LeadershipPosition @relation(fields: [positionId], references: [id])
-  positionId   String
-  level        PositionLevel
+  id         String             @id @default(uuid())
+  student    Student            @relation(fields: [studentId], references: [id])
+  studentId  String
+  session    Session            @relation(fields: [sessionId], references: [id])
+  sessionId  String
+  position   LeadershipPosition @relation(fields: [positionId], references: [id])
+  positionId String
+  level      PositionLevel
 }
