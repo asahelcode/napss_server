@@ -18,18 +18,11 @@ enum PositionLevel {
   DEPARTMENT
 }
 
-model Student {
-  id           String              @id @default(uuid())
-  name         String              @unique
-  department   Department          @relation(fields: [departmentId], references: [id])
-  departmentId String              @default(uuid())
-  history      LeadershipHistory[]
-}
-
 model Department {
-  id        String    @id @default(uuid())
-  name      String
-  officials Student[]
+  id              String                     @id @default(uuid())
+  name            String                     @unique
+  history         LeadershipHistory[]
+  accomplishments DepartmentAccomplishment[]
 }
 
 model Session {
@@ -40,17 +33,35 @@ model Session {
 
 model LeadershipPosition {
   id       String              @id @default(uuid())
-  position String
+  position String              @unique
   history  LeadershipHistory[]
 }
 
 model LeadershipHistory {
-  id         String             @id @default(uuid())
-  student    Student            @relation(fields: [studentId], references: [id])
-  studentId  String
-  session    Session            @relation(fields: [sessionId], references: [id])
-  sessionId  String
-  position   LeadershipPosition @relation(fields: [positionId], references: [id])
-  positionId String
-  level      PositionLevel
+  id           String             @id @default(uuid())
+  studentName  String
+  studentImage String
+  department   Department         @relation(fields: [departmentId], references: [id])
+  departmentId String
+  session      Session            @relation(fields: [sessionId], references: [id])
+  sessionId    String
+  position     LeadershipPosition @relation(fields: [positionId], references: [id])
+  positionId   String
+  level        PositionLevel
+}
+
+model DepartmentAccomplishment {
+  id           String     @id @default(uuid())
+  sessionId    String
+  description  String
+  imageUrl     String
+  department   Department @relation(fields: [departmentId], references: [id])
+  departmentId String
+}
+
+model FacultyAccomplishment {
+  id          String @id @default(uuid())
+  sessionId   String
+  description String
+  imageUrl    String
 }
