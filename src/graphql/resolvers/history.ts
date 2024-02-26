@@ -37,13 +37,14 @@ const historyResolver = {
   },
   Mutation: {
     createHistory: async (_: any, args: any, { prisma }: any) => {
-      const { sessionId, studentName, level, positionId, departmentId } = args
+      const { sessionId, studentName, level, positionId, departmentId, studentImage } = args
       return prisma.leadershipHistory.create({
         data: {
           sessionId,
           studentName,
           positionId,
           departmentId,
+          studentImage,
           level
         }
       })
