@@ -3,11 +3,33 @@ const historyResolver = {
     histories: async (_: any, __: any, { prisma }: any) => {
       return prisma.leadershipHistory.findMany({
         include: {
-          student: {
-            include: {
-              department: true
-            }
-          },
+          position: true,
+          session: true
+        }
+      })
+    },
+    departmentOfficials: async (_: any, args: any, { prisma }: any) => {
+      const { departmentId, sessionId } = args
+      return prisma.leadershipHistory.findMany({
+        where: {
+          departmentId,
+          sessionId,
+          level: 'DEPARTMENT'
+        },
+        include: {
+          position: true
+        }
+      })
+    },
+    facultyOfficials: async (_: any, args: any, { prisma }: any) => {
+      const { sessionId } = args
+      return prisma.leadershipHistory.findMany({
+        where: {
+          sessionId,
+          level: 'FACULTY'
+        },
+        include: {
+          department: true,
           position: true
         }
       })
@@ -15,12 +37,13 @@ const historyResolver = {
   },
   Mutation: {
     createHistory: async (_: any, args: any, { prisma }: any) => {
-      const { sessionId, studentId, level, positionId } = args
+      const { sessionId, studentName, level, positionId, departmentId } = args
       return prisma.leadershipHistory.create({
         data: {
           sessionId,
-          studentId,
+          studentName,
           positionId,
+          departmentId,
           level
         }
       })
