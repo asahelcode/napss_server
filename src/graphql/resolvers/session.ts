@@ -8,7 +8,7 @@ const sessionResolver = {
               level: {
                 in: ['FACULTY', 'DEPARTMENT']
               },
-              positionId: '9af3d1a4-fe3f-4a32-82b3-8f5db3beecf0'
+              positionId: 'c85e2fb9-827e-46a7-9cae-498fec337cf7'
             },
             include: {
               department: true,
@@ -25,7 +25,7 @@ const sessionResolver = {
             where: {
               level: 'FACULTY',
               positionId: {
-                in: ['9af3d1a4-fe3f-4a32-82b3-8f5db3beecf0', '1d83474e-de7c-41c0-8220-3cc51984384c']
+                in: ['c85e2fb9-827e-46a7-9cae-498fec337cf7', '74fd8ba6-ddb8-439d-ba8a-aff060c40987']
               }
             },
             include: {
@@ -43,7 +43,7 @@ const sessionResolver = {
             where: {
               level: 'DEPARTMENT',
               positionId: {
-                in: ['9af3d1a4-fe3f-4a32-82b3-8f5db3beecf0', '1d83474e-de7c-41c0-8220-3cc51984384c']
+                in: ['c85e2fb9-827e-46a7-9cae-498fec337cf7', '74fd8ba6-ddb8-439d-ba8a-aff060c40987']
               }
             },
             include: {

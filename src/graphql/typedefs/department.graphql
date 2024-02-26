@@ -1,10 +1,12 @@
 type Department {
   id: String!
   name: String!
+  history: [LeadershipHistory]
 }
 
 type Query {
   departments: [Department]
+  departmentsPresidentAndVicePresident: [Department]
 }
 
 type Mutation {

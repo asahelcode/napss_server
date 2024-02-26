@@ -1,0 +1,10 @@
+type Accomplishment {
+  id: String
+  description: String
+  imageUrl: String
+}
+
+type Mutation {
+  createDepartmentAccomplishment(departmentId: String!, description: String!, imageUrl: String!, sessionId: String!): Accomplishment
+  createFacultyAccomplishment(sessionId: String!, imageUrl: String!, description: String!): Accomplishment
+}

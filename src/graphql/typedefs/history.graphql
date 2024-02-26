@@ -5,6 +5,7 @@ type LeadershipHistory {
   session: Session
   department: Department
   level: String
+  studentImage: String
 }
 
 enum LeadershipLevel {
@@ -19,5 +20,5 @@ type Query {
 }
 
 type Mutation {
-  createHistory(studentName: String!, sessionId: String!, departmentId: String!, positionId: String!, level: LeadershipLevel!): LeadershipHistory
+  createHistory(studentName: String!, sessionId: String!, departmentId: String!, positionId: String!, level: LeadershipLevel!, studentImage: String!): LeadershipHistory
 }
