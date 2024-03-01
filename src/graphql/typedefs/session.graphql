@@ -8,6 +8,8 @@ type Query {
   sessionFacultyAndDeptPresident: [Session]
   sessionFacultyPresidentAndVice: [Session]
   sessionDepartmentPresidentAndVice: [Session]
+  getSessionFacultyPresidentAndVice(session: String!): Session
+  getSessionDepartmentPresidentAndVice(session: String!): [Session]
 }
 
 type Mutation {
