@@ -8,6 +8,7 @@ type Query {
   sessionFacultyAndDeptPresident: [Session]
   sessionFacultyPresidentAndVice: [Session]
   sessionDepartmentPresidentAndVice: [Session]
+  getsessionFacultyAndDeptPresident(session: String!): [Session]
   getSessionFacultyPresidentAndVice(session: String!): Session
   getSessionDepartmentPresidentAndVice(session: String!): [Session]
 }
