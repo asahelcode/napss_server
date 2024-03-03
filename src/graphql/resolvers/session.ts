@@ -51,7 +51,8 @@ const sessionResolver = {
             },
             include: {
               position: true,
-              department: true
+              department: true,
+              session: true
             }
           }
         }
@@ -120,13 +121,13 @@ const sessionResolver = {
             },
             include: {
               department: true,
-              position: true
+              position: true,
+              session: true
             }
           }
         }
       })
     },
-    
   },
   Mutation: {
     createSession: async (_: any, args: any, { prisma }: any) => {
