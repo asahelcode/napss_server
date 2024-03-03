@@ -3,14 +3,19 @@ type Session {
   session: String
   history: [LeadershipHistory]
 }
+enum LeadershipLevel {
+  FACULTY
+  DEPARTMENT
+}
 
 type Query {
+  sessions: [Session]
   sessionFacultyAndDeptPresident: [Session]
   sessionFacultyPresidentAndVice: [Session]
   sessionDepartmentPresidentAndVice: [Session]
-  getsessionFacultyAndDeptPresident(session: String!): [Session]
-  getSessionFacultyPresidentAndVice(session: String!): Session
-  getSessionDepartmentPresidentAndVice(session: String!): [Session]
+  getSessionFacultyAndDeptPresident(sessionId: String!): [Session]
+  getSessionFacultyPresidentAndVice(sessionId: String!): Session
+  getSessionDepartmentPresidentAndVice(sessionId: String!): [Session]
 }
 
 type Mutation {

@@ -1,5 +1,8 @@
 const sessionResolver = {
   Query: {
+    sessions: (_: any, __: any, { prisma }: any) => {
+      return prisma.session.findMany()
+    },
     sessionFacultyAndDeptPresident: (_: any, __: any, { prisma }: any) => {
       return prisma.session.findMany({
         include: {
@@ -18,7 +21,6 @@ const sessionResolver = {
         }
       })
     },
-    
     sessionFacultyPresidentAndVice: (_: any, __: any, { prisma }: any) => {
       return prisma.session.findMany({
         include: {
@@ -49,22 +51,23 @@ const sessionResolver = {
             },
             include: {
               position: true,
-              department: true
+              department: true,
+              session: true
             }
           }
         }
       })
     },
     getSessionFacultyPresidentAndVice: async (_: any, args: any, { prisma }: any) => {
-      const { session } = args
+      const { sessionId } = args
 
       return prisma.session.findUnique({
         where: {
-          session
+          id: sessionId
         },
         include: {
           history: {
-          where: {
+            where: {
               level: 'FACULTY',
               positionId: {
                 in: ['c85e2fb9-827e-46a7-9cae-498fec337cf7', '74fd8ba6-ddb8-439d-ba8a-aff060c40987']
@@ -78,12 +81,12 @@ const sessionResolver = {
         }
       })
     },
-    getsessionFacultyAndDeptPresident: async (_: any, args: any, { prisma }: any) => {
-      const { session } = args
+    getSessionFacultyAndDeptPresident: async (_: any, args: any, { prisma }: any) => {
+      const { sessionId } = args
 
       return prisma.session.findMany({
         where: {
-          session
+          id: sessionId
         },
         include: {
           history: {
@@ -102,15 +105,15 @@ const sessionResolver = {
       })
     },
     getSessionDepartmentPresidentAndVice: async (_: any, args: any, { prisma }: any) => {
-      const { session } = args
+      const { sessionId } = args
 
       return prisma.session.findMany({
         where: {
-          session
+          id: sessionId
         },
         include: {
           history: {
-          where: {
+            where: {
               level: 'DEPARTMENT',
               positionId: {
                 in: ['c85e2fb9-827e-46a7-9cae-498fec337cf7', '74fd8ba6-ddb8-439d-ba8a-aff060c40987']
@@ -118,15 +121,14 @@ const sessionResolver = {
             },
             include: {
               department: true,
-              position: true
+              position: true,
+              session: true
             }
           }
         }
       })
-    }
+    },
   },
-
-  
   Mutation: {
     createSession: async (_: any, args: any, { prisma }: any) => {
       const { session } = args
