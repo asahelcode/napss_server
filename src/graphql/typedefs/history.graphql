@@ -17,6 +17,7 @@ type Query {
   histories: [LeadershipHistory]
   departmentOfficials(departmentId: String!, sessionId: String!): [LeadershipHistory]
   facultyOfficials(sessionId: String!): [LeadershipHistory]
+  searchOfficials(name: String!): [LeadershipHistory]
 }
 
 type Mutation {
