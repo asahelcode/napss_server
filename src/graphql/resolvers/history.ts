@@ -8,6 +8,22 @@ const historyResolver = {
         }
       })
     },
+    searchOfficials: async (_: any, args: any, { prisma }: any ) => {
+      const { name } = args
+      return prisma.leadershipHistory.findMany({
+        where: {
+          studentName: {
+            contains: name,
+            mode: 'insensitive'
+          }
+        },
+        include: {
+          department: true,
+          position: true,
+          session: true
+        }
+      })
+    },
     departmentOfficials: async (_: any, args: any, { prisma }: any) => {
       const { departmentId, sessionId } = args
       return prisma.leadershipHistory.findMany({

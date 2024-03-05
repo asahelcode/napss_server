@@ -1,6 +1,7 @@
 type Session {
   id: String
   session: String
+  status: Boolean
   history: [LeadershipHistory]
 }
 enum LeadershipLevel {
@@ -19,5 +20,5 @@ type Query {
 }
 
 type Mutation {
-  createSession(session: String!): Session
+  createSession(session: String!, status: Boolean!): Session
 }

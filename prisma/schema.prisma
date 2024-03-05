@@ -28,6 +28,7 @@ model Department {
 model Session {
   id      String              @id @default(uuid())
   session String              @unique
+  status  Boolean
   history LeadershipHistory[]
 }
 

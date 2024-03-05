@@ -131,10 +131,11 @@ const sessionResolver = {
   },
   Mutation: {
     createSession: async (_: any, args: any, { prisma }: any) => {
-      const { session } = args
+      const { session, status } = args
       return prisma.session.create({
         data: {
-          session
+          session,
+          status
         }
       })
     }
