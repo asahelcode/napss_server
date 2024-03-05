@@ -6,7 +6,7 @@ const departmentResolver = {
           history: {
             where: {
               positionId: {
-                in: ['c85e2fb9-827e-46a7-9cae-498fec337cf7', '74fd8ba6-ddb8-439d-ba8a-aff060c40987']
+                in: ['f6c7d0e8-c8ec-48f4-8d48-5627e490f1d2', 'af804803-beb0-4e8f-a56a-74441bd428fb']
               },
               level: 'DEPARTMENT'
             },

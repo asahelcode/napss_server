@@ -19,27 +19,27 @@ enum PositionLevel {
 }
 
 model Department {
-  id              String                     @id @default(uuid())
+  id              String                     @id @default(dbgenerated("gen_random_uuid()"))
   name            String                     @unique
   history         LeadershipHistory[]
   accomplishments DepartmentAccomplishment[]
 }
 
 model Session {
-  id      String              @id @default(uuid())
+  id String @id @default(dbgenerated("gen_random_uuid()"))
   session String              @unique
   status  Boolean
   history LeadershipHistory[]
 }
 
 model LeadershipPosition {
-  id       String              @id @default(uuid())
+  id String @id @default(dbgenerated("gen_random_uuid()"))
   position String              @unique
   history  LeadershipHistory[]
 }
 
 model LeadershipHistory {
-  id           String             @id @default(uuid())
+  id String @id @default(dbgenerated("gen_random_uuid()"))
   studentName  String
   studentImage String
   department   Department         @relation(fields: [departmentId], references: [id])
@@ -52,7 +52,7 @@ model LeadershipHistory {
 }
 
 model DepartmentAccomplishment {
-  id           String     @id @default(uuid())
+  id String @id @default(dbgenerated("gen_random_uuid()"))
   sessionId    String
   description  String
   imageUrl     String
@@ -61,7 +61,7 @@ model DepartmentAccomplishment {
 }
 
 model FacultyAccomplishment {
-  id          String @id @default(uuid())
+  id String @id @default(dbgenerated("gen_random_uuid()"))
   sessionId   String
   description String
   imageUrl    String
