@@ -1,6 +1,5 @@
 import { makeExecutableSchema } from '@graphql-tools/schema'
 import { readFileSync } from 'fs'
-// import studentResolver from './resolvers/student'
 import positionResolver from './resolvers/position'
 import departmentResolver from './resolvers/department'
 import sessionResolver from './resolvers/session'

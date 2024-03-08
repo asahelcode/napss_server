@@ -116,7 +116,7 @@ const sessionResolver = {
             where: {
               level: 'DEPARTMENT',
               positionId: {
-                  in: ['f6c7d0e8-c8ec-48f4-8d48-5627e490f1d2', 'af804803-beb0-4e8f-a56a-74441bd428fb']
+                in: ['f6c7d0e8-c8ec-48f4-8d48-5627e490f1d2', 'af804803-beb0-4e8f-a56a-74441bd428fb']
               }
             },
             include: {
@@ -127,7 +127,7 @@ const sessionResolver = {
           }
         }
       })
-    },
+    }
   },
   Mutation: {
     createSession: async (_: any, args: any, { prisma }: any) => {
