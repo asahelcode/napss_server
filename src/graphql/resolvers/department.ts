@@ -1,4 +1,37 @@
+import { presidentId, vicePresidentId } from '../../constants/index'
+
 const departmentResolver = {
+  Department: {
+    officials: async (parent: any, __: any, { prisma }: any) => {
+      return prisma.leadershipHistory.findMany({
+        where: {
+          departmentId: parent.id,
+          level: 'DEPARTMENT'
+        },
+        include: {
+          position: true
+        }
+      })
+    },
+    president: async (parent: any, __: any, { prisma }: any) => {
+      return prisma.leadershipHistory.findFirst({
+        where: {
+          departmentId: parent.id,
+          positionId: presidentId,
+          level: 'DEPARTMENT'
+        }
+      })
+    },
+    vicePresident: async (parent: any, __: any, { prisma }: any) => {
+      return prisma.leadershipHistory.findFirst({
+        where: {
+          departmentId: parent.id,
+          positionId: vicePresidentId,
+          level: 'DEPARTMENT'
+        }
+      })
+    }
+  },
   Query: {
     departmentsPresidentAndVicePresident: async (_: any, __: any, { prisma }: any) => {
       return prisma.department.findMany({

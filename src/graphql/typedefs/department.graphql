@@ -2,6 +2,9 @@ type Department {
   id: String!
   name: String!
   history: [LeadershipHistory]
+  officials: [LeadershipHistory]
+  president: LeadershipHistory
+  vicePresident: LeadershipHistory
 }
 
 type Query {

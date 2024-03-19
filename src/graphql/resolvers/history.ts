@@ -8,7 +8,7 @@ const historyResolver = {
         }
       })
     },
-    searchOfficials: async (_: any, args: any, { prisma }: any ) => {
+    searchOfficials: async (_: any, args: any, { prisma }: any) => {
       const { name } = args
       return prisma.leadershipHistory.findMany({
         where: {
