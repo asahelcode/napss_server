@@ -17,6 +17,7 @@ enum LeadershipLevel {
 type Query {
   sessions: [Session]
   session(sessionId: String!): Session
+  departmentsPresidentAndVicePresident: [Department]
 }
 
 type Mutation {

@@ -3,13 +3,10 @@ import { presidentId, vicePresidentId } from '../../constants/index'
 const departmentResolver = {
   Department: {
     officials: async (parent: any, __: any, { prisma }: any) => {
+      console.log(parent.parent)
       return prisma.leadershipHistory.findMany({
         where: {
-          departmentId: parent.id,
-          level: 'DEPARTMENT'
-        },
-        include: {
-          position: true
+          departmentId: parent.id
         }
       })
     },
@@ -39,7 +36,7 @@ const departmentResolver = {
           history: {
             where: {
               positionId: {
-                in: ['f6c7d0e8-c8ec-48f4-8d48-5627e490f1d2', 'af804803-beb0-4e8f-a56a-74441bd428fb']
+                in: [presidentId, vicePresidentId]
               },
               level: 'DEPARTMENT'
             },

@@ -7,24 +7,36 @@ const sessionResolver = {
         include: {
           history: {
             where: {
-              sessionId: parent.id
+              sessionId: parent.id,
+              positionId: {
+                in: [presidentId, vicePresidentId]
+              },
+              level: 'DEPARTMENT'
+            },
+            include: {
+              position: true,
+              department: true
             }
           }
-        },
-        
+        }
       })
     },
     officials: async (parent: any, __: any, { prisma }: any) => {
       return prisma.leadershipHistory.findMany({
         where: {
           sessionId: parent.id,
-          level: 'FACULTY'
+          level: 'FACULTY',
+          positionId: {
+            not: {
+              in: [presidentId, vicePresidentId]
+            }
+          }
         }
       })
     },
     president: (parent: any, __: any, { prisma }: any) => {
       return prisma.leadershipHistory.findFirst({
-        where: {      
+        where: {
           sessionId: parent.id,
           positionId: presidentId
         },
