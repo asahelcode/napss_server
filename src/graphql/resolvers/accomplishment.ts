@@ -26,7 +26,7 @@ const accomplishmentResolver = {
         }
       })
     },
-    allFacultyAccomplishments: (_: any, __: any, { prisma }: any ) => {
+    allFacultyAccomplishments: (_: any, __: any, { prisma }: any) => {
       return prisma.facultyAccomplishment.findMany()
     }
   },

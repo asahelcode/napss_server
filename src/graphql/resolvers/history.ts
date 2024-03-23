@@ -1,13 +1,7 @@
+import { presidentId, vicePresidentId } from '../../constants/index'
+
 const historyResolver = {
   Query: {
-    histories: async (_: any, __: any, { prisma }: any) => {
-      return prisma.leadershipHistory.findMany({
-        include: {
-          position: true,
-          session: true
-        }
-      })
-    },
     searchOfficials: async (_: any, args: any, { prisma }: any) => {
       const { name } = args
       return prisma.leadershipHistory.findMany({
@@ -24,28 +18,47 @@ const historyResolver = {
         }
       })
     },
-    departmentOfficials: async (_: any, args: any, { prisma }: any) => {
-      const { departmentId, sessionId } = args
+    departmentPresidents: async (_: any, args: any, { prisma }: any) => {
+      const { sessionId } = args
+
       return prisma.leadershipHistory.findMany({
         where: {
-          departmentId,
           sessionId,
-          level: 'DEPARTMENT'
+          level: 'DEPARTMENT',
+          positionId: presidentId
+        },
+        include: {
+          department: true
+        }
+      })
+    },
+    departmentPresidentAndVicePresident: async (_: any, args: any, { prisma }: any) => {
+      const { sessionId, departmentId } = args
+
+      return prisma.leadershipHistory.findMany({
+        where: {
+          sessionId,
+          level: 'DEPARTMENT',
+          positionId: {
+            in: [presidentId, vicePresidentId]
+          },
+          departmentId
         },
         include: {
           position: true
         }
       })
     },
-    facultyOfficials: async (_: any, args: any, { prisma }: any) => {
-      const { sessionId } = args
+    departmentOfficials: async (_: any, args: any, { prisma }: any) => {
+      const { sessionId, departmentId } = args
+
       return prisma.leadershipHistory.findMany({
         where: {
           sessionId,
-          level: 'FACULTY'
+          level: 'DEPARTMENT',
+          departmentId
         },
         include: {
-          department: true,
           position: true
         }
       })
