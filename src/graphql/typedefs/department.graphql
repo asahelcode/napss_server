@@ -4,11 +4,6 @@ type Department {
   history: [LeadershipHistory]
 }
 
-type Query {
-  departments: [Department]
-  departmentsPresidentAndVicePresident: [Department]
-}
-
 type Mutation {
   createDepartment(name: String!): Department
 }

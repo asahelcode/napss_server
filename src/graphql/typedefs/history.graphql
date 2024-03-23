@@ -1,3 +1,5 @@
+
+
 type LeadershipHistory {
   id: String
   studentName: String
@@ -6,6 +8,7 @@ type LeadershipHistory {
   department: Department
   level: String
   studentImage: String
+  departments: [Session]
 }
 
 enum LeadershipLevel {
@@ -14,10 +17,10 @@ enum LeadershipLevel {
 }
 
 type Query {
-  histories: [LeadershipHistory]
-  departmentOfficials(departmentId: String!, sessionId: String!): [LeadershipHistory]
-  facultyOfficials(sessionId: String!): [LeadershipHistory]
+  departmentPresidents(sessionId: String!): [LeadershipHistory]
   searchOfficials(name: String!): [LeadershipHistory]
+  departmentPresidentAndVicePresident(sessionId: String!, departmentId: String!): [LeadershipHistory]
+  departmentOfficials(sessionId: String!, departmentId: String!): [LeadershipHistory]
 }
 
 type Mutation {
