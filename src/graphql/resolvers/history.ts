@@ -1,4 +1,4 @@
-import { presidentId, vicePresidentId } from '../../constants/index'
+// import { presidentId, vicePresidentId } from '../../constants/index'
 
 const historyResolver = {
   Query: {
@@ -15,51 +15,6 @@ const historyResolver = {
           department: true,
           position: true,
           session: true
-        }
-      })
-    },
-    departmentPresidents: async (_: any, args: any, { prisma }: any) => {
-      const { sessionId } = args
-
-      return prisma.leadershipHistory.findMany({
-        where: {
-          sessionId,
-          level: 'DEPARTMENT',
-          positionId: presidentId
-        },
-        include: {
-          department: true
-        }
-      })
-    },
-    departmentPresidentAndVicePresident: async (_: any, args: any, { prisma }: any) => {
-      const { sessionId, departmentId } = args
-
-      return prisma.leadershipHistory.findMany({
-        where: {
-          sessionId,
-          level: 'DEPARTMENT',
-          positionId: {
-            in: [presidentId, vicePresidentId]
-          },
-          departmentId
-        },
-        include: {
-          position: true
-        }
-      })
-    },
-    departmentOfficials: async (_: any, args: any, { prisma }: any) => {
-      const { sessionId, departmentId } = args
-
-      return prisma.leadershipHistory.findMany({
-        where: {
-          sessionId,
-          level: 'DEPARTMENT',
-          departmentId
-        },
-        include: {
-          position: true
         }
       })
     }
