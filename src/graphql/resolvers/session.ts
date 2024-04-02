@@ -2,9 +2,6 @@ import { presidentId, vicePresidentId } from '../../constants/index'
 
 const sessionResolver = {
   Session: {
-    departments: async (_: any, __: any, { prisma }: any) => {
-      return prisma.department.findMany()
-    },
     officials: async (parent: any, __: any, { prisma }: any) => {
       return prisma.leadershipHistory.findMany({
         where: {

@@ -6,13 +6,10 @@ type Accomplishment {
 
 type Query {
   accomplishments: [Accomplishment]
-  departmentAccomplishments(departmentId: String!, sessionId: String!): [Accomplishment]
   facultyAccomplishments(sessionId: String!): [Accomplishment]
-  allDepartmentAccomplishments: [Accomplishment]
   allFacultyAccomplishments: [Accomplishment]
 }
 
 type Mutation {
-  createDepartmentAccomplishment(departmentId: String!, description: String!, imageUrl: String!, sessionId: String!): Accomplishment
   createFacultyAccomplishment(sessionId: String!, imageUrl: String!, description: String!): Accomplishment
 }

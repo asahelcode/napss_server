@@ -6,7 +6,6 @@ type Session {
   president: LeadershipHistory
   vicePresident: LeadershipHistory
   officials: [LeadershipHistory]
-  departments: [Department]
 }
 
 enum LeadershipLevel {
@@ -17,10 +16,8 @@ enum LeadershipLevel {
 type Query {
   sessions: [Session]
   session(sessionId: String!): Session
-  sessionDepartments: [Session]
 }
 
 type Mutation {
   createSession(session: String!, status: Boolean!): Session
 }
-
