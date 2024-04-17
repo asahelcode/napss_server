@@ -1,7 +1,9 @@
 import express from 'express'
 import cors from 'cors'
 import { PrismaClient } from '@prisma/client'
-import userRouter from './routes/executives'
+import executivesRouter from './routes/executives'
+import sessionRouter from './routes/session'
+import accomplishmentRouter from './routes/accomplishment'
 
 const app = express()
 app.use(express.json())
@@ -9,10 +11,12 @@ app.use(cors())
 
 export const prisma = new PrismaClient()
 
-app.use('/api/executives', userRouter)
+app.use('/api/faculty', executivesRouter)
+app.use('/api/sessions', sessionRouter)
+app.use('/api/accomplishments', accomplishmentRouter)
 
 const main = async (): Promise<void> => {
-  app.listen({ port: 4000 }, () => {
+  app.listen({ port: 4001 }, () => {
     console.log('dev server up')
   })
 }

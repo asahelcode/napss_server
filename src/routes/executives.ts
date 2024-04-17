@@ -1,9 +1,10 @@
-import { FacultyPresidentAndVicePresident } from '../controllers/executives'
+/* eslint-disable @typescript-eslint/no-misused-promises */
+import { FacultyMembers, FacultyPresidentAndVicePresident } from '../controllers/executives'
 import { Router } from 'express'
 
-const userRouter = Router()
+const executivesRouter = Router()
 
-// eslint-disable-next-line @typescript-eslint/no-misused-promises
-userRouter.get('/members', FacultyPresidentAndVicePresident)
+executivesRouter.get('/sessions/leaders', FacultyPresidentAndVicePresident)
+executivesRouter.get('/session/:sessionId/leaders/all', FacultyMembers)
 
-export default userRouter
+export default executivesRouter
