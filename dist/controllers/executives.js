@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.FacultyMembers = exports.FacultyPresidentAndVicePresident = void 0;
+exports.SearchMember = exports.FacultyMembers = exports.FacultyPresidentAndVicePresident = void 0;
 const __1 = require("..");
 const constants_1 = require("../constants");
 // eslint-disable-next-line @typescript-eslint/no-misused-promises
@@ -61,3 +61,21 @@ const FacultyMembers = (req, res) => __awaiter(void 0, void 0, void 0, function*
     res.status(200).json(sessionMembers);
 });
 exports.FacultyMembers = FacultyMembers;
+const SearchMember = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const name = typeof req.query.name === 'string' ? req.query.name : undefined;
+    const searchResult = yield __1.prisma.leadershipHistory.findMany({
+        where: {
+            studentName: {
+                contains: name,
+                mode: 'insensitive'
+            }
+        },
+        include: {
+            department: true,
+            position: true,
+            session: true
+        }
+    });
+    res.status(200).json(searchResult);
+});
+exports.SearchMember = SearchMember;
