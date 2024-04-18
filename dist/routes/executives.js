@@ -6,4 +6,5 @@ const express_1 = require("express");
 const executivesRouter = (0, express_1.Router)();
 executivesRouter.get('/sessions/leaders', executives_1.FacultyPresidentAndVicePresident);
 executivesRouter.get('/session/:sessionId/leaders/all', executives_1.FacultyMembers);
+executivesRouter.get('/session/leader', executives_1.SearchMember);
 exports.default = executivesRouter;
