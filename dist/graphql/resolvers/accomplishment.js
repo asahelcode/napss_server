@@ -11,15 +11,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const accomplishmentResolver = {
     Query: {
-        departmentAccomplishments: (_, args, { prisma }) => {
-            const { departmentId, sessionId } = args;
-            return prisma.departmentAccomplishment.findMany({
-                where: {
-                    departmentId,
-                    sessionId
-                }
-            });
-        },
         facultyAccomplishments: (_, args, { prisma }) => {
             const { sessionId } = args;
             return prisma.facultyAccomplishment.findMany({
@@ -28,29 +19,11 @@ const accomplishmentResolver = {
                 }
             });
         },
-        allDepartmentAccomplishments: (_, __, { prisma }) => {
-            return prisma.departmentAccomplishment.findMany({
-                include: {
-                    department: true
-                }
-            });
-        },
         allFacultyAccomplishments: (_, __, { prisma }) => {
             return prisma.facultyAccomplishment.findMany();
         }
     },
     Mutation: {
-        createDepartmentAccomplishment: (_, args, { prisma }) => __awaiter(void 0, void 0, void 0, function* () {
-            const { departmentId, sessionId, description, imageUrl } = args;
-            return prisma.departmentAccomplishment.create({
-                data: {
-                    departmentId,
-                    sessionId,
-                    description,
-                    imageUrl
-                }
-            });
-        }),
         createFacultyAccomplishment: (_, args, { prisma }) => __awaiter(void 0, void 0, void 0, function* () {
             const { sessionId, description, imageUrl } = args;
             return prisma.facultyAccomplishment.create({

@@ -58,4 +58,23 @@ const FacultyMembers: (req: Request, res: Response) => void = async (req, res) =
   res.status(200).json(sessionMembers)
 }
 
-export { FacultyPresidentAndVicePresident, FacultyMembers }
+const SearchMember: (req: Request, res: Response) => Promise<void> = async (req, res) => {
+  const name: string | undefined = typeof req.query.name === 'string' ? req.query.name : undefined
+
+  const searchResult = await prisma.leadershipHistory.findMany({
+    where: {
+      studentName: {
+        contains: name,
+        mode: 'insensitive'
+      }
+    },
+    include: {
+      department: true,
+      position: true,
+      session: true
+    }
+  })
+  res.status(200).json(searchResult)
+}
+
+export { FacultyPresidentAndVicePresident, FacultyMembers, SearchMember }

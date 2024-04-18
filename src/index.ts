@@ -16,7 +16,7 @@ app.use('/api/sessions', sessionRouter)
 app.use('/api/accomplishments', accomplishmentRouter)
 
 const main = async (): Promise<void> => {
-  app.listen({ port: 4001 }, () => {
+  app.listen({ port: 4005 }, () => {
     console.log('dev server up')
   })
 }
