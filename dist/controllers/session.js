@@ -9,18 +9,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const studentResolver = {
-    Mutation: {
-        createStudent: (_, args, { prisma }) => __awaiter(void 0, void 0, void 0, function* () {
-            const { name, departmentId } = args;
-            console.log(departmentId);
-            return prisma.student.create({
-                data: {
-                    name,
-                    departmentId
-                }
-            });
-        })
+exports.getAllSession = void 0;
+const __1 = require("..");
+const getAllSession = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const sessions = yield __1.prisma.session.findMany();
+        res.status(200).json(sessions);
     }
-};
-exports.default = studentResolver;
+    catch (err) {
+        console.log(err);
+    }
+});
+exports.getAllSession = getAllSession;

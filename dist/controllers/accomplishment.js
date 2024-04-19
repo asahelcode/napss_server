@@ -9,16 +9,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const positionResolver = {
-    Mutation: {
-        createPosition: (_, args, { prisma }) => __awaiter(void 0, void 0, void 0, function* () {
-            const { position } = args;
-            return prisma.leadershipPosition.create({
-                data: {
-                    position
-                }
-            });
-        })
-    }
-};
-exports.default = positionResolver;
+exports.getAccomplishments = void 0;
+const __1 = require("..");
+const getAccomplishments = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { sessionId } = req.params;
+    const accomplishments = yield __1.prisma.facultyAccomplishment.findMany({
+        where: { sessionId }
+    });
+    console.log(sessionId);
+    res.status(200).json(accomplishments);
+});
+exports.getAccomplishments = getAccomplishments;

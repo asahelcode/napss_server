@@ -1,28 +1,22 @@
 import express from 'express'
 import cors from 'cors'
-import { ApolloServer } from 'apollo-server-express'
 import { PrismaClient } from '@prisma/client'
-import schema from './graphql/schema'
+import executivesRouter from './routes/executives'
+import sessionRouter from './routes/session'
+import accomplishmentRouter from './routes/accomplishment'
 
 const app = express()
+app.use(express.json())
 app.use(cors())
 
-const prisma = new PrismaClient()
+export const prisma = new PrismaClient()
 
-const startServer = async (): Promise<void> => {
-  const server = new ApolloServer({
-    schema,
-    context: { prisma },
-    introspection: true
-  })
-
-  await server.start().then(() => { console.log('successfully start graphql server') })
-  server.applyMiddleware({ app, path: '/graphql' })
-}
+app.use('/api/faculty', executivesRouter)
+app.use('/api/sessions', sessionRouter)
+app.use('/api/accomplishments', accomplishmentRouter)
 
 const main = async (): Promise<void> => {
-  await startServer()
-  app.listen({ port: 4000 }, () => {
+  app.listen({ port: 4005 }, () => {
     console.log('dev server up')
   })
 }
