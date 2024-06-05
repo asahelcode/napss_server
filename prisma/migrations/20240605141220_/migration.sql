@@ -1,9 +1,9 @@
 -- CreateEnum
-CREATE TYPE "PositionLevel" AS ENUM ('FACULTY', 'DEPARTMENT');
+CREATE TYPE "PositionLevel" AS ENUM ('EXECUTIVE', 'LEGISLATIVE');
 
 -- CreateTable
 CREATE TABLE "Department" (
-    "id" TEXT NOT NULL,
+    "id" TEXT NOT NULL DEFAULT gen_random_uuid(),
     "name" TEXT NOT NULL,
 
     CONSTRAINT "Department_pkey" PRIMARY KEY ("id")
@@ -11,23 +11,25 @@ CREATE TABLE "Department" (
 
 -- CreateTable
 CREATE TABLE "Session" (
-    "id" TEXT NOT NULL,
+    "id" TEXT NOT NULL DEFAULT gen_random_uuid(),
     "session" TEXT NOT NULL,
+    "status" BOOLEAN NOT NULL,
 
     CONSTRAINT "Session_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "LeadershipPosition" (
-    "id" TEXT NOT NULL,
+    "id" TEXT NOT NULL DEFAULT gen_random_uuid(),
     "position" TEXT NOT NULL,
+    "level" "PositionLevel" NOT NULL,
 
     CONSTRAINT "LeadershipPosition_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "LeadershipHistory" (
-    "id" TEXT NOT NULL,
+    "id" TEXT NOT NULL DEFAULT gen_random_uuid(),
     "studentName" TEXT NOT NULL,
     "studentImage" TEXT NOT NULL,
     "departmentId" TEXT NOT NULL,
@@ -40,7 +42,7 @@ CREATE TABLE "LeadershipHistory" (
 
 -- CreateTable
 CREATE TABLE "DepartmentAccomplishment" (
-    "id" TEXT NOT NULL,
+    "id" TEXT NOT NULL DEFAULT gen_random_uuid(),
     "sessionId" TEXT NOT NULL,
     "description" TEXT NOT NULL,
     "imageUrl" TEXT NOT NULL,
@@ -51,7 +53,7 @@ CREATE TABLE "DepartmentAccomplishment" (
 
 -- CreateTable
 CREATE TABLE "FacultyAccomplishment" (
-    "id" TEXT NOT NULL,
+    "id" TEXT NOT NULL DEFAULT gen_random_uuid(),
     "sessionId" TEXT NOT NULL,
     "description" TEXT NOT NULL,
     "imageUrl" TEXT NOT NULL,

@@ -1,4 +1,4 @@
-const presidentId = 'f6c7d0e8-c8ec-48f4-8d48-5627e490f1d2'
-const vicePresidentId = 'af804803-beb0-4e8f-a56a-74441bd428fb'
+const presidentId = 'a9e2d8a4-c2a7-4ed2-92b4-062952e0496e'
+const vicePresidentId = 'cc50ddee-3256-41f9-a222-bbf153ecfaee'
 
 export { presidentId, vicePresidentId }

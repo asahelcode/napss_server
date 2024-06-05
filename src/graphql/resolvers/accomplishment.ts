@@ -1,15 +1,6 @@
 const accomplishmentResolver = {
   Query: {
-    departmentAccomplishments: (_: any, args: any, { prisma }: any) => {
-      const { departmentId, sessionId } = args
-
-      return prisma.departmentAccomplishment.findMany({
-        where: {
-          departmentId,
-          sessionId
-        }
-      })
-    },
+ 
     facultyAccomplishments: (_: any, args: any, { prisma }: any) => {
       const { sessionId } = args
 
@@ -31,17 +22,6 @@ const accomplishmentResolver = {
     }
   },
   Mutation: {
-    createDepartmentAccomplishment: async (_: any, args: any, { prisma }: any) => {
-      const { departmentId, sessionId, description, imageUrl } = args
-      return prisma.departmentAccomplishment.create({
-        data: {
-          departmentId,
-          sessionId,
-          description,
-          imageUrl
-        }
-      })
-    },
     createFacultyAccomplishment: async (_: any, args: any, { prisma }: any) => {
       const { sessionId, description, imageUrl } = args
       return prisma.facultyAccomplishment.create({

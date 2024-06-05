@@ -6,10 +6,11 @@ const positionResolver = {
   },
   Mutation: {
     createPosition: async (_: any, args: any, { prisma }: any) => {
-      const { position } = args
+      const { position, level } = args
       return prisma.leadershipPosition.create({
         data: {
-          position
+          position,
+          level
         }
       })
     }

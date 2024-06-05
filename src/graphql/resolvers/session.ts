@@ -9,7 +9,7 @@ const sessionResolver = {
       return prisma.leadershipHistory.findMany({
         where: {
           sessionId: parent.id,
-          level: 'FACULTY',
+          level: 'EXECUTIVE',
           positionId: {
             not: {
               in: [presidentId, vicePresidentId]
@@ -22,12 +22,23 @@ const sessionResolver = {
         }
       })
     },
+    legislatives: async (parent: any, __: any, { prisma }: any) => {
+      return prisma.leadershipHistory.findMany({
+        where: {
+          sessionId: parent.id,
+          level: 'LEGISLATIVE'
+        },
+        include: {
+          department: true,
+          position: true
+        }
+      })
+    },
     president: (parent: any, __: any, { prisma }: any) => {
       return prisma.leadershipHistory.findFirst({
         where: {
           sessionId: parent.id,
           positionId: presidentId,
-          level: 'FACULTY'
         },
         include: {
           department: true
@@ -39,7 +50,6 @@ const sessionResolver = {
         where: {
           sessionId: parent.id,
           positionId: vicePresidentId,
-          level: 'FACULTY'
         },
         include: {
           department: true

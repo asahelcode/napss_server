@@ -14,8 +14,8 @@ datasource db {
 }
 
 enum PositionLevel {
-  FACULTY
-  DEPARTMENT
+  EXECUTIVE
+  LEGISLATIVE
 }
 
 model Department {
@@ -35,6 +35,7 @@ model Session {
 model LeadershipPosition {
   id String @id @default(dbgenerated("gen_random_uuid()"))
   position String              @unique
+  level   PositionLevel
   history  LeadershipHistory[]
 }
 
