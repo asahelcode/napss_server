@@ -5,7 +5,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const schema_1 = require("@graphql-tools/schema");
 const fs_1 = require("fs");
-// import studentResolver from './resolvers/student'
 const position_1 = __importDefault(require("./resolvers/position"));
 const department_1 = __importDefault(require("./resolvers/department"));
 const session_1 = __importDefault(require("./resolvers/session"));

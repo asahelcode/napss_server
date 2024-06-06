@@ -9,133 +9,76 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const index_1 = require("../../constants/index");
 const sessionResolver = {
+    Session: {
+        departments: (_, __, { prisma }) => __awaiter(void 0, void 0, void 0, function* () {
+            return prisma.department.findMany();
+        }),
+        officials: (parent, __, { prisma }) => __awaiter(void 0, void 0, void 0, function* () {
+            return prisma.leadershipHistory.findMany({
+                where: {
+                    sessionId: parent.id,
+                    level: 'EXECUTIVE',
+                    positionId: {
+                        not: {
+                            in: [index_1.presidentId, index_1.vicePresidentId]
+                        }
+                    }
+                },
+                include: {
+                    department: true,
+                    position: true
+                }
+            });
+        }),
+        legislatives: (parent, __, { prisma }) => __awaiter(void 0, void 0, void 0, function* () {
+            return prisma.leadershipHistory.findMany({
+                where: {
+                    sessionId: parent.id,
+                    level: 'LEGISLATIVE'
+                },
+                include: {
+                    department: true,
+                    position: true
+                }
+            });
+        }),
+        president: (parent, __, { prisma }) => {
+            return prisma.leadershipHistory.findFirst({
+                where: {
+                    sessionId: parent.id,
+                    positionId: index_1.presidentId,
+                },
+                include: {
+                    department: true
+                }
+            });
+        },
+        vicePresident: (parent, __, { prisma }) => {
+            return prisma.leadershipHistory.findFirst({
+                where: {
+                    sessionId: parent.id,
+                    positionId: index_1.vicePresidentId,
+                },
+                include: {
+                    department: true
+                }
+            });
+        }
+    },
     Query: {
         sessions: (_, __, { prisma }) => {
             return prisma.session.findMany();
         },
-        sessionFacultyAndDeptPresident: (_, __, { prisma }) => {
-            return prisma.session.findMany({
-                include: {
-                    history: {
-                        where: {
-                            level: {
-                                in: ['FACULTY', 'DEPARTMENT']
-                            },
-                            positionId: 'c85e2fb9-827e-46a7-9cae-498fec337cf7'
-                        },
-                        include: {
-                            department: true,
-                            position: true
-                        }
-                    }
-                }
-            });
-        },
-        sessionFacultyPresidentAndVice: (_, __, { prisma }) => {
-            return prisma.session.findMany({
-                include: {
-                    history: {
-                        where: {
-                            level: 'FACULTY',
-                            positionId: {
-                                in: ['c85e2fb9-827e-46a7-9cae-498fec337cf7', '74fd8ba6-ddb8-439d-ba8a-aff060c40987']
-                            }
-                        },
-                        include: {
-                            department: true,
-                            position: true
-                        }
-                    }
-                }
-            });
-        },
-        sessionDepartmentPresidentAndVice: (_, __, { prisma }) => {
-            return prisma.session.findMany({
-                include: {
-                    history: {
-                        where: {
-                            level: 'DEPARTMENT',
-                            positionId: {
-                                in: ['c85e2fb9-827e-46a7-9cae-498fec337cf7', '74fd8ba6-ddb8-439d-ba8a-aff060c40987']
-                            }
-                        },
-                        include: {
-                            position: true,
-                            department: true,
-                            session: true
-                        }
-                    }
-                }
-            });
-        },
-        getSessionFacultyPresidentAndVice: (_, args, { prisma }) => __awaiter(void 0, void 0, void 0, function* () {
+        session: (_, args, { prisma }) => {
             const { sessionId } = args;
             return prisma.session.findUnique({
                 where: {
                     id: sessionId
-                },
-                include: {
-                    history: {
-                        where: {
-                            level: 'FACULTY',
-                            positionId: {
-                                in: ['c85e2fb9-827e-46a7-9cae-498fec337cf7', '74fd8ba6-ddb8-439d-ba8a-aff060c40987']
-                            }
-                        },
-                        include: {
-                            department: true,
-                            position: true
-                        }
-                    }
                 }
             });
-        }),
-        getSessionFacultyAndDeptPresident: (_, args, { prisma }) => __awaiter(void 0, void 0, void 0, function* () {
-            const { sessionId } = args;
-            return prisma.session.findMany({
-                where: {
-                    id: sessionId
-                },
-                include: {
-                    history: {
-                        where: {
-                            level: {
-                                in: ['FACULTY', 'DEPARTMENT']
-                            },
-                            positionId: 'c85e2fb9-827e-46a7-9cae-498fec337cf7'
-                        },
-                        include: {
-                            department: true,
-                            position: true
-                        }
-                    }
-                }
-            });
-        }),
-        getSessionDepartmentPresidentAndVice: (_, args, { prisma }) => __awaiter(void 0, void 0, void 0, function* () {
-            const { sessionId } = args;
-            return prisma.session.findMany({
-                where: {
-                    id: sessionId
-                },
-                include: {
-                    history: {
-                        where: {
-                            level: 'DEPARTMENT',
-                            positionId: {
-                                in: ['c85e2fb9-827e-46a7-9cae-498fec337cf7', '74fd8ba6-ddb8-439d-ba8a-aff060c40987']
-                            }
-                        },
-                        include: {
-                            department: true,
-                            position: true,
-                            session: true
-                        }
-                    }
-                }
-            });
-        }),
+        }
     },
     Mutation: {
         createSession: (_, args, { prisma }) => __awaiter(void 0, void 0, void 0, function* () {

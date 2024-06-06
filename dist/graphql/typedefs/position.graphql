@@ -1,0 +1,17 @@
+type Position {
+  id: String!
+  position: String!
+}
+
+enum PositionLevel {
+  EXECUTIVE
+  LEGISLATIVE
+}
+
+type Query {
+  positions: [Position]
+}
+
+type Mutation {
+  createPosition(position: String!, level: PositionLevel!): Position
+}

@@ -10,25 +10,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const departmentResolver = {
-    Query: {
-        departmentsPresidentAndVicePresident: (_, __, { prisma }) => __awaiter(void 0, void 0, void 0, function* () {
-            return prisma.department.findMany({
-                include: {
-                    history: {
-                        where: {
-                            positionId: {
-                                in: ['c85e2fb9-827e-46a7-9cae-498fec337cf7', '74fd8ba6-ddb8-439d-ba8a-aff060c40987']
-                            },
-                            level: 'DEPARTMENT'
-                        },
-                        include: {
-                            session: true
-                        }
-                    }
-                }
-            });
-        })
-    },
     Mutation: {
         createDepartment: (_, args, { prisma }) => __awaiter(void 0, void 0, void 0, function* () {
             const { name } = args;

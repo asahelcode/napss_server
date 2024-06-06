@@ -1,0 +1,27 @@
+type Session {
+  id: String
+  session: String
+  status: Boolean
+  history: [LeadershipHistory]
+  president: LeadershipHistory
+  vicePresident: LeadershipHistory
+  officials: [LeadershipHistory]
+  legislatives: [LeadershipHistory]
+  departments: [Department]
+}
+
+enum LeadershipLevel {
+  EXECUTIVE
+  LEGISLATIVE
+}
+
+type Query {
+  sessions: [Session]
+  session(sessionId: String!): Session
+  sessionDepartments: [Session]
+}
+
+type Mutation {
+  createSession(session: String!, status: Boolean!): Session
+}
+

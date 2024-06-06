@@ -10,12 +10,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const positionResolver = {
+    Query: {
+        positions: (_, __, { prisma }) => __awaiter(void 0, void 0, void 0, function* () {
+            return prisma.leadershipPosition.findMany();
+        })
+    },
     Mutation: {
         createPosition: (_, args, { prisma }) => __awaiter(void 0, void 0, void 0, function* () {
-            const { position } = args;
+            const { position, level } = args;
             return prisma.leadershipPosition.create({
                 data: {
-                    position
+                    position,
+                    level
                 }
             });
         })

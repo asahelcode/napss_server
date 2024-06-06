@@ -1,0 +1,9 @@
+type Department {
+  id: String!
+  name: String!
+  history: [LeadershipHistory]
+}
+
+type Mutation {
+  createDepartment(name: String!): Department
+}

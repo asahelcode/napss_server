@@ -1,0 +1,16 @@
+type Accomplishment {
+  id: String
+  description: String
+  imageUrl: String
+}
+
+type Query {
+  accomplishments: [Accomplishment]
+  facultyAccomplishments(sessionId: String!): [Accomplishment]
+  allDepartmentAccomplishments: [Accomplishment]
+  allFacultyAccomplishments: [Accomplishment]
+}
+
+type Mutation {
+  createFacultyAccomplishment(sessionId: String!, imageUrl: String!, description: String!): Accomplishment
+}

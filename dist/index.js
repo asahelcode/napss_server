@@ -12,6 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.prisma = void 0;
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const apollo_server_express_1 = require("apollo-server-express");
@@ -19,11 +20,11 @@ const client_1 = require("@prisma/client");
 const schema_1 = __importDefault(require("./graphql/schema"));
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)());
-const prisma = new client_1.PrismaClient();
+exports.prisma = new client_1.PrismaClient();
 const startServer = () => __awaiter(void 0, void 0, void 0, function* () {
     const server = new apollo_server_express_1.ApolloServer({
         schema: schema_1.default,
-        context: { prisma },
+        context: { prisma: exports.prisma },
         introspection: true
     });
     yield server.start().then(() => { console.log('successfully start graphql server'); });
@@ -39,5 +40,5 @@ main().catch((err) => {
     console.error(err);
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
 }).finally(() => __awaiter(void 0, void 0, void 0, function* () {
-    yield prisma.$disconnect();
+    yield exports.prisma.$disconnect();
 }));
