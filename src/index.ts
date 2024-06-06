@@ -7,7 +7,7 @@ import schema from './graphql/schema'
 const app = express()
 app.use(cors())
 
-const prisma = new PrismaClient()
+export const prisma = new PrismaClient()
 
 const startServer = async (): Promise<void> => {
   const server = new ApolloServer({

@@ -8,11 +8,12 @@ generator client {
   provider = "prisma-client-js"
 }
 
-datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
-}
 
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+}
+        
 enum PositionLevel {
   EXECUTIVE
   LEGISLATIVE
@@ -22,7 +23,6 @@ model Department {
   id              String                     @id @default(dbgenerated("gen_random_uuid()"))
   name            String                     @unique
   history         LeadershipHistory[]
-  accomplishments DepartmentAccomplishment[]
 }
 
 model Session {
@@ -50,15 +50,6 @@ model LeadershipHistory {
   position     LeadershipPosition @relation(fields: [positionId], references: [id])
   positionId   String
   level        PositionLevel
-}
-
-model DepartmentAccomplishment {
-  id String @id @default(dbgenerated("gen_random_uuid()"))
-  sessionId    String
-  description  String
-  imageUrl     String
-  department   Department @relation(fields: [departmentId], references: [id])
-  departmentId String
 }
 
 model FacultyAccomplishment {

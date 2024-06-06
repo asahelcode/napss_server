@@ -1,6 +1,5 @@
 const accomplishmentResolver = {
   Query: {
- 
     facultyAccomplishments: (_: any, args: any, { prisma }: any) => {
       const { sessionId } = args
 
